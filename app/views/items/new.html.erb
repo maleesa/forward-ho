@@ -1,0 +1,21 @@
+<h1>Items#new</h1>
+<p>Find me in app/views/items/new.html.erb</p>
+
+<%= simple_form_for @item, :html => {:class => 'pull-left'} do |f| %>
+  <h1>Create Item</h1>
+  <%= f.input :name, label: 'Name of item', placeholder: 'ie: "Avocados"' %>
+  <%= f.input :current_amount, label: 'Current Amount', placeholder: '?' %>
+  <%= f.input :unit_quantity, label: 'Unit Quantity', placeholder: '1' %>
+  <%= f.input :unit_name, label: 'Unit Type', placeholder: 'LB' %>
+  <%= f.input :min_amount, label: 'Min Amount', placeholder: 'threshold' %>
+  <%= f.input :max_amount, label: 'Max Amount', placeholder: 'full house' %>
+  <%= f.input :purchase_amount, label: 'Purchase Amount', placeholder: 'xx' %>
+  <%= f.input :notes, label: 'Notes' %>
+  <%= f.simple_fields_for :suppliers do |s_form| %>
+  <%= s_form.input :id, :collection => @suppliers, :label => "Suppliers" %>
+  <% end %>
+  <%= f.simple_fields_for :storage_location do |s_form| %>
+  <%= s_form.input :id, :collection => @storage_locations, :label => "Storage Location" %>
+  <% end %>
+  <%= f.button :submit %>
+<% end %>
