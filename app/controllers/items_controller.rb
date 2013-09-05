@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
     @item = Item.new
     @suppliers = Supplier.all
     @storage_locations = StorageLocation.all
+    @user = current_user
   end
 
   def create
@@ -31,6 +32,8 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
+    @suppliers = Supplier.all
+    @user = current_user
   end
 
   def destroy
@@ -42,4 +45,5 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :current_amount, :min_amount, :max_amount, :purchase_amount, :unit_name, :unit_quantity, :notes)
   end
+
 end

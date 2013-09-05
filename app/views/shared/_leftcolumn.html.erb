@@ -1,0 +1,12 @@
+		<div id="left">
+			<span id="title-master" class="title">MASTER LIST</span>
+			<ul class="left-nav">
+				<li id="master"><%= link_to "Inventory", items_path, id: "master-text" %></li>
+			</ul>
+			<span id="title-stores" class="title">SUPPLIERS</span>
+			<ul class="left-nav">
+				<% @suppliers.each do |supplier| %>
+					<li><%= link_to supplier.name, supplier_path(supplier.id) %></li>
+				<% end %>
+			</ul>
+		</div>

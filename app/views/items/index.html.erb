@@ -1,41 +1,13 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-    <meta charset="UTF-8">
-    <title>Cafe Inventory</title>
-    <link href="format.css" style="text/css" rel="stylesheet">
-	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'> 
-	<link href='http://fonts.googleapis.com/css?family=Leckerli+One' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-</head>
-<body class="wrapper">
-	<div id="header-info">
-		<div class="header-wrapper">
-			<div id="header">
-				<h1 id="logo">
-					CafeInventory
-				</h1>
-			</div>
-			<div id="right-header">
-				<ul id="navigation">
-					<li class="first"><a href="" class="nav-link">Home</a></li>
-					<li><a href="" class="nav-link">Edit</a></li>
-					<li><a href="" class="nav-link">Contact</a></li>
-					<li class="last"><a href="" class="nav-link">Log out</a></li>
-				</ul>
-				<h4 id="user_name"> 
-					Hi, Emily!
-				</h4>
-			</div>
-		</div>
-	</div>
-	<!--header-->
+
+<div class="wrapper">
+	<%= render "shared/header" %>
 	<div class="content-wrapper">	
 		<div id="content">
 			<div id="sort">
 				<h3>Inventory</h3>
 				<div class="button_right">
-					<a href="" class="button_save">Save Changes</a>
+					<%= link_to "Add Item", new_item_path, class: "button_save" %>
+
 				</div>
 				<div id="row">
 					<p>Sort By: </p>
@@ -56,63 +28,43 @@
 						<th>Notes</th>
 					</tr>
 					</div>
-					<tr>
-						<td>Almonds</td>
-						<td><input id="quantity" type="text" value="2"></td>
-						<td>1-lb bags</td>
-						<td>Island</td>
-						<td>Trader Joe's</td>
-						<td>Check to see if extras are behind brown sugar.</td>
-					</tr>
-					<tr>
-						<td>Brie</td>
-						<td><input id="quantity" type="text" value="5"></td>
-						<td>8-oz wheels</td>
-						<td>Boba Fridge</td>
-						<td>Trader Joe's</td>
-						<td>New wheels purchased every week.</td>
-					</tr>
-					<tr>
-						<td>Flour</td>
-						<td><input id="quantity" type="text" value="3"></td>
-						<td>5-lb bags</td>
-						<td>Pantry</td>
-						<td>Nature's Best</td>
-						<td>Extra kept in pantry, bottom shelf.</td>
-					</tr>
-					<tr>
-						<td>Jam</td>
-						<td><input id="quantity" type="text" value="2"></td>
-						<td>16-oz jars</td>
-						<td>Pantry</td>
-						<td>Trader Joe's</td>
-						<td>2-3 varieties okay.</td>
-					</tr>
+					<% @items.each do |item| %>
+						<tr>
+							<td><%= item.name %></td>
+							<td>
+								<%= simple_form_for item do |f| %>
+								<!-- <input id="quantity" type="text" value="<%= item.current_amount %>"> -->
+									<%= f.input :current_amount, :label=>false, :value=> item.current_amount , :input_html => {:class=> "item-amount"} %>
+								<% end %>
+							</td>
+							<td><%= item.unit_quantity %> <%= item.unit_name %></td>
+							<td>
+								<% item.storage_locations.each do |location| %>
+									<%= location.name %>
+								<% end %>
+							</td>
+							<td>
+								<% item.suppliers.each do |supplier| %>
+									<%= supplier.name %>
+								<% end %>
+							</td>
+							<td><%= item.notes %></td>
+						</tr>
+					<% end %>
 				</table>	
 			</div>
 		</div>
-		<div id="left">
-			<span id="title-master" class="title">MASTER LIST</span>
-			<ul class="left-nav">
-				<li id="master"><a href=""><span id="master-text">Inventory</span></a></li>
-			</ul>
-			<span id="title-stores" class="title">SUPPLIERS</span>
-			<ul class="left-nav">
-				<li><a href="">Trader Joe's</a></li>
-				<li><a href="">Farmer's Market SLO</a></li>
-				<li><a href="">Costco</a></li>
-				<li><a href="">SLO Paper</a></li>
-				<li><a href="">UNFI</a></li>
-				<li><a href="">Specialty</a></li>
-			</ul>
-		</div>
+		<%= render "shared/leftcolumn" %>
 	</div>
 	<!--container-->
-	<div class="footer-wrapper">
-		<div id="footer">
-			Another Project by <a href="">MaleesaMade</a>
-		</div>
-	</div>
+	<%= render "shared/footer" %>
 	<!--footer-->
-</body>
-</html>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(document).on("change", ".item-amount", function(){
+			$($($(this).parent()).parent()).submit();
+		})
+	});
+</script>

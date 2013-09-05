@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     deny_access unless logged_in?
     # @users = User.all
     @user = User.find(session[:user_id])
-    redirect_to dashboard_path
+    redirect_to suppliers_path
   end
 
   private

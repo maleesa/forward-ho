@@ -1,0 +1,48 @@
+<div class="wrapper">
+	<%= render "shared/header" %>
+	<div class="content-wrapper">
+			<div id="content">
+				<div id="sort">					
+					<h3><%= @findsupplier[:name] %></h3>
+					<div class="button_right">
+						<%= link_to "Add Item", new_item_path, class: "button_save" %>
+					</div>
+					<div id="row">
+						<p>Sort By: </p>
+						<a href="" class="sorted" id="current_sort">Items A-Z</a>
+						<a href="" class="sorted">Cafe Location</a>
+						<a href="" class="sorted">Supplier</a>
+					</div>
+				</div>
+				<div id="product-table">
+					<table>
+						<div id="top_row">					
+						<tr>
+							<th></th>
+							<th>Item</th>
+							<th>Quantity Needed</th>
+							<th>Units</th>
+							<th>Notes</th>
+						</tr>
+						</div>
+<!-- 							if @findsupplier[:name] = @finditem[] -->
+							<% @items.each do |item| %>
+								<tr>
+									<td>									
+										<%= simple_form_for item do |f| %>
+											<%= f.input :name, :as => :boolean, :label=>false %>
+										<% end %>
+									</td>
+									<td><%= item.name %></td>
+									<td><%= item.purchase_amount %></td>
+									<td><%= item.unit_quantity %> <%= item.unit_name %></td>
+									<td><%= item.notes %></td>
+								</tr>
+							<% end %>
+					</table>	
+				</div>
+			</div>
+		<%= render "shared/leftcolumn" %>
+	</div>
+<%= render "shared/footer" %>
+</div>

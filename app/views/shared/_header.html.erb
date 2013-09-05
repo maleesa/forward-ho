@@ -1,0 +1,19 @@
+	<div id="header-info">
+		<div class="header-wrapper">
+			<div id="header">
+				<h1 id="logo">
+					CafeInventory
+				</h1>
+			</div>
+			<div id="right-header">
+				<ul id="navigation">
+					<li class="first"><%= link_to "Home", items_path, class: "nav-link" %></li>	
+					<li><%= link_to "Contact", new_supplier_path, class: "nav-link" %></li>
+					<li class="last"><%= link_to "Log Out", signout_path, class: "nav-link" %></li>
+				</ul>
+				<h4 id="user_name"> 
+					Hi, <%= @user.first_name %>!
+				</h4>
+			</div>
+		</div>
+	</div>

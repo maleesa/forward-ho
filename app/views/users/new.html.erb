@@ -1,10 +1,18 @@
-<div class="left_margin">
-<%= simple_form_for(@user) do |f| %>
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
-  <%= f.input :email %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
-  <%= f.button :submit %>
-<% end %>
+<div class="wrapper">
+	<%= render "shared/regheader" %>
+	<div class="content-wrapper">
+			<div class="banner">
+				<%= simple_form_for(@user) do |f| %>
+				  <%= f.input :first_name %>
+				  <%= f.input :last_name %>
+				  <%= f.input :email %>
+				  <%= f.input :password %>
+				  <%= f.input :password_confirmation %>
+				  <%= f.button :submit, class: "button_save", id: "createuserbutton" %>
+				<% end %>
+			<h5><%= link_to "Already a user?", new_session_path %></h5>
+			</div>
+	</div>
+<%= render "shared/regfooter" %>
 </div>
+ 
