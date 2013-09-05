@@ -19,7 +19,10 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: db_production_mp
   pool: 5
   timeout: 5000
+
+#MP: changed production adapter from sqlite3 to postgresql
+#MP: changed production database to a custom name from 'db/production.sqlite3' to 'db_production_mp'
