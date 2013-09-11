@@ -1,19 +1,28 @@
 <div class="wrapper">
+	<div id="page">
 	<%= render "shared/regheader" %>
 	<div class="content-wrapper">
 			<div class="banner">
+			<div id="welcome">A simple list-maker for cafes to organize and track inventory.</div>
 				<% if flash[:alert] %>
 					<p><%= flash[:alert] %></p>
 				<% end %>
-			<div id="welcome">Welcome Back!</div>
-			<%= simple_form_for :session, :url => sessions_path do |f| %>
-				<%= f.input :email %>
-				<%= f.input :password %>
-				<%= f.submit 'Log In', class: "button_save", id: "loginbutton" %>
-			<% end %>
-			<h5><%= link_to "Sign Up", new_user_path %></h5>
+			<div id="receipt">
+				<%= simple_form_for :session, :url => sessions_path do |f| %>
+					<%= f.input :email %>
+					<%= f.input :password %>
+					<%= f.submit 'Log In', class: "button_save", id: "loginbutton" %>
+				<% end %>
+				<div id="login_text">
+					<% if flash[:alert] %>
+						<p><%= flash[:alert] %></p>
+					<% end %>
+				</div>
+			</div>
+<!-- 			<h5><%= link_to "Sign Up", new_user_path %></h5> -->
 			</div>
 	</div>
 <%= render "shared/regfooter" %>
+	</div>
 </div>
 

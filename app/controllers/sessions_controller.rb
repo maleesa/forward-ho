@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   	# user = User.authenticate(params[:session][:email], params[:session][:password])
 	if user == false || user.nil?
 		flash.now[:error] = "Invalid email/password combination."
-		redirect_to new_user_path, :flash => { :error => 'Email and password don\'t match.' }
+		redirect_to new_session_path, :flash => { :error => 'Email and password don\'t match.' }
 	else
 		log_in user
 		redirect_to users_path
